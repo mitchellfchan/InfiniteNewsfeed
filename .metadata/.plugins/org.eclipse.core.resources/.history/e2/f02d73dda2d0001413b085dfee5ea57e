@@ -1,0 +1,60 @@
+package com.mitchellfchan.sketchbook.camDesigner;
+
+import processing.core.PApplet;
+import processing.core.PVector;
+import java.util.ArrayList;
+
+
+
+
+public class CamDesigner extends PApplet{
+	
+	ArrayList <PVector> doodle;
+	int startX = 0;
+	int startY = 0;
+	
+	
+	public void setup(){
+		size(600,600);
+		fill(255, 130, 89, 128);
+		doodle = new ArrayList<PVector>();
+		
+	}
+	
+	public void draw(){
+		background(255);
+		if(mousePressed) record();
+		displayDoodle();
+		
+	}
+	
+	public static void main(String _args[]) {
+		String name = "Boner Slam"; 
+		PApplet.main(com.mitchellfchan.sketchbook.camDesigner.CamDesigner.class.getName());
+	}
+	
+	public void drawDoodleBounds(){
+		pushMatrix();
+		popMatrix();
+		
+	}
+	
+	public void record(){
+		
+		PVector newPoint  = new PVector((mouseX - startX), (mouseY - startY));
+		doodle.add(newPoint);
+		
+	}
+	
+	public void displayDoodle(){
+		if(doodle.size() > 0){
+		for (int i = 0; i < doodle.size(); i++) {
+			  PVector v1 = doodle.get(i);
+			  PVector v2 = doodle.get(i+1);
+			  stroke(0,128);
+			  line(v1.x, v1.y, v2.x, v2.y);
+			}
+		}
+	}
+
+}

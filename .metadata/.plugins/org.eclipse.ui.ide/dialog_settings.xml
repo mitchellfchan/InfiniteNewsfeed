@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+		<item value="proclipsing.core.createproject.NewProcessingProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="processing.plugin.ui.newWizards"/>
+			<item value="proclipsing.core.wizardCategory"/>
+		</list>
+	</section>
+</section>

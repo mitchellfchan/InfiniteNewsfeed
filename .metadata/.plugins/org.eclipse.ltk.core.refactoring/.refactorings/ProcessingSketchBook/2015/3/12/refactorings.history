@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;polygonizer&apos; to &apos;com.mitchellfchan.sketchbook.polygonizer&apos;&#x0A;- Original project: &apos;ProcessingSketchBook&apos;&#x0A;- Original element: &apos;ProcessingSketchBook/src/polygonizer&apos;&#x0A;- Renamed element: &apos;ProcessingSketchBook/src/com.mitchellfchan.sketchbook.polygonizer&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;polygonizer&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;polygonizer" name="com.mitchellfchan.sketchbook.polygonizer" qualified="false" references="true" stamp="1426436857966" textual="false" version="1.0"/>
+</session>
