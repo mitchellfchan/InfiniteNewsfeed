@@ -76,7 +76,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ProcessingSketchBook/lib/base/video"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/base/core/core.jar">
+	<classpathentry kind="lib" path="lib/base/core/core.jar" sourcepath="lib/base/core/core.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ProcessingSketchBook/lib/base/core"/>
 		</attributes>
