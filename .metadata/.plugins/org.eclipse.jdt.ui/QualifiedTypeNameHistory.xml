@@ -5,4 +5,5 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="processing.core.PVector"/>
 <fullyQualifiedTypeName name="processing.core.PShape"/>
+<fullyQualifiedTypeName name="reference.beesandbombs.motionblur.MotionBlur"/>
 </qualifiedTypeNameHistroy>

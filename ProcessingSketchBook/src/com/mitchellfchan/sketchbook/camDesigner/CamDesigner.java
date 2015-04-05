@@ -18,6 +18,9 @@ public class CamDesigner extends PApplet{
 	int camRadius;
 	float camDisplaySize = 200;
 	
+	public PShape xCam;
+	public PShape yCam;
+	
 	public void setup(){
 		size(600,600, P2D);
 		//fill(255, 130, 89, 128);
@@ -26,6 +29,8 @@ public class CamDesigner extends PApplet{
 		camRadius = 200;
 		doodle = new ArrayList<PVector>();
 		cam1 = new PShape();
+		xCam = createShape();
+		yCam = createShape();
 		
 	}
 	
@@ -34,8 +39,8 @@ public class CamDesigner extends PApplet{
 		drawDoodleBounds();
 		if(mousePressed) record();
 		displayDoodle();
-		renderCam();
-		//shape(camCurrent, width/2, height/2,100f,100f);
+		
+		
 		
 		
 	}
@@ -65,7 +70,7 @@ public class CamDesigner extends PApplet{
 		
 		PVector newPoint  = new PVector((mouseX), (mouseY));
 		doodle.add(newPoint);
-		
+		renderCam();
 		
 	}
 	
@@ -85,22 +90,37 @@ public class CamDesigner extends PApplet{
 	
 	
 	public void keyPressed(){
+	
 		doodle.clear();
+		
 	}
 	
 	public void renderCam(){
-		float angleStep = PApplet.TWO_PI/doodle.size();
-		
-		
+		float angleStep = (PApplet.TWO_PI*7/8)/doodle.size();
 		
 		PShape xCam = createShape();
 		xCam.beginShape();
+		
+		
 		for(int i = 0; i < doodle.size(); i++ ){
 			PVector v = doodle.get(i);
 			float x = (camRadius + (v.x - startX)/4) * PApplet.cos(i*angleStep);
 			float y = (camRadius + (v.x - startX)/4) * PApplet.sin(i*angleStep);
 			xCam.vertex(x, y);
-		}
+		} 
+		xCam.beginContour();
+		xCam.vertex(-10, 0);
+		xCam.vertex(10, 0);
+		xCam.endContour();	
+		xCam.beginContour();
+		xCam.vertex(0, -10);
+		xCam.vertex(0, 10);
+		xCam.endContour();
+		xCam.beginContour();
+		xCam.vertex(50, -10);
+		xCam.vertex(50, 10);
+		xCam.vertex(100, 0);
+		xCam.endContour();
 		xCam.endShape(CLOSE);
 		
 		PShape yCam = createShape();
@@ -111,25 +131,44 @@ public class CamDesigner extends PApplet{
 			float y = (camRadius + (v.y - startY)/2) * PApplet.sin(i*angleStep);
 			yCam.vertex(x, y);
 		}
+		yCam.beginContour();
+		yCam.vertex(-10, 0);
+		yCam.vertex(10, 0);
+		yCam.endContour();	
+		yCam.beginContour();
+		yCam.vertex(0, -10);
+		yCam.vertex(0, 10);
+		yCam.endContour();
+		yCam.beginContour();
+		yCam.vertex(50, -10);
+		yCam.vertex(50, 10);
+		yCam.vertex(100, 0);
+		yCam.endContour();
 		yCam.endShape(CLOSE);
 		
 		this.pushMatrix();
 		this.pushStyle();
-		strokeWeight(4);
+		//strokeWeight(2);
 		stroke(0);
 		fill(143,211,210);
 		this.translate(width/4, height-200);
+		xCam.setStrokeWeight(4);
 		shape(xCam, 0, 0,camDisplaySize,camDisplaySize);
-		ellipse(0,0,10,10);
 		this.translate(width/2, 0);
 		strokeWeight(4);
 		stroke(0);
+		yCam.setStrokeWeight(4);
 		shape(yCam, 0, 0,camDisplaySize,camDisplaySize);
-		ellipse(0,0,10,10);
 		this.popStyle();
 		this.popMatrix();
 		
 		
+		
+	}
+	
+	public void displayCam(){
+		
+
 		
 	}
 
