@@ -312,6 +312,15 @@
 	<classpathentry kind="lib" path="lib/user/toxiclibs-complete-0020/toxiclibscore/library/toxiclibscore.jar"/>
 	<classpathentry kind="lib" path="lib/user/java-google-translate-text-to-speech-master/lib/jl1.0.jar"/>
 	<classpathentry kind="lib" path="lib/user/sound/library/sound.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/cmudict04.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/cmulex.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/en_us.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/freetts.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/mbrola.jar"/>
+	<classpathentry kind="lib" path="lib/user/ttslib/library/ttslib.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-builder-5.2-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-lang-en-5.2.jar"/>

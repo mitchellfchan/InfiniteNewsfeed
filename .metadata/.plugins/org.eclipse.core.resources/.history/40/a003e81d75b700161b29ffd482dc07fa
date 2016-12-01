@@ -1,0 +1,11 @@
+package com.darkprograms.speech.synthesiser;
+
+public class Main {
+	
+	SynthesiserV2 vocals;
+
+	public Main() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
