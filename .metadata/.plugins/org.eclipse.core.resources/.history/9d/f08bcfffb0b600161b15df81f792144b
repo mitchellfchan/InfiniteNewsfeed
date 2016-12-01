@@ -1,0 +1,102 @@
+package theInfinityScore;
+
+import java.util.ArrayList;
+
+import ddf.minim.*;
+import ddf.minim.ugens.*;
+import processing.sound.SoundFile;
+
+public class Singer {
+	
+	InfinityScore parent;
+	Minim minim;
+	Vocoder vocode;
+	TextToSpeech tts;
+	ArrayList<Sampler> samples;
+	Sampler testSampler;
+	
+	int hitOn = 4;
+	int numFiles;
+	int currentPlace = 0;
+		
+	
+	public Singer(InfinityScore _parent){
+		parent = _parent;
+		minim = parent.minim;
+		Vocoder vocode = new Vocoder(1024,8);
+
+		samples = new ArrayList<Sampler>();
+		//testSampler = new Sampler("1.wav", 4, minim);
+	  tts = new TextToSpeech();
+	  tts.setVoice("dfki-poppy-hsmm");
+	  tts.saveTTSfile("testing");	
+}
+	
+	public void realTimeReciteLyrics(String lyrics){
+		tts.speak(lyrics, 1.0f, false, true);
+	}
+	
+	public void recordSoundFiles(ArrayList<String> l){
+		
+		numFiles = l.size();
+		if ( parent.verbose) System.out.println("recordSoundFiles: "+ numFiles + " is size of String Array List");
+		for (int i = 0; i < l.size(); i++){
+			tts.saveTTSfile(l.get(i), i);
+			//tts.saveTTSfile(parent.libretto.headline);    //this would save the whole headline
+			if (parent.verbose) System.out.println("recordSoundFiles: saved" + i);
+		}
+		initSoundFiles(numFiles);
+	}
+	
+	
+	public void playSample(int index){
+
+		Sampler s = samples.get(index);		
+		s.patch(parent.out);
+		s.trigger();
+	}
+	
+
+	
+	public void singNext(){
+
+		playSample(currentPlace);
+		if (parent.verbose) System.out.println(currentPlace + " / " + samples.size() + " words in array" );
+		int x = Die.getRoll(.75f, .25f);
+		if( x == 1) currentPlace++;
+		if(currentPlace >= samples.size()){
+			currentPlace = (int)(Math.random()*samples.size());
+		}
+	}
+	
+	public void initSoundFiles(int num){
+
+		samples.clear();
+		String path = parent.sketchPath + "/soundFiles/";
+		if (parent.verbose) System.out.println(path + " is where we're searching for those files.");
+		for(int i = 0; i < num; i ++){
+	
+		Sampler sa = new Sampler(path + i + ".wav", 4, minim);
+		sa.patch(parent.out);
+		//sa.patch(vocode.modulator);
+		//Oscil wave1 = new Oscil()
+
+		samples.add(sa);
+		if (parent.verbose)System.out.println(samples.iterator()); 
+		}
+		if (parent.verbose) System.out.println("initSoundFiles: " + samples.size() + " is size of Sampler arrayList");
+	}
+	
+	public void patchVocoder(Sampler sx){
+		sx.patch(vocode.modulator);
+	}
+	
+	public void clearSamples(){	
+		
+			samples.clear();
+			
+	}
+		
+	
+
+}

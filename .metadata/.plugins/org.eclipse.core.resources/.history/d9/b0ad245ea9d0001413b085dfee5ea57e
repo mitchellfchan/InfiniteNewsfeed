@@ -1,5 +1,0 @@
-package com.mitchellfchan.sketchbook.camDesigner;
-
-public @interface override {
-
-}

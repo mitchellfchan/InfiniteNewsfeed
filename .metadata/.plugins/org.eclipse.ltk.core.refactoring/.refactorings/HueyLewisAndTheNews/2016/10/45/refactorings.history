@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;theInfinityScore.Lyrist.java&apos; to &apos;Lyricist.java&apos;&#x0A;- Original project: &apos;HueyLewisAndTheNews&apos;&#x0A;- Original element: &apos;theInfinityScore.Lyrist.java&apos;&#x0A;- Renamed element: &apos;theInfinityScore.Lyricist.java&apos;" description="Rename compilation unit &apos;Lyrist.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;theInfinityScore{Lyrist.java" name="Lyricist.java" references="false" stamp="1477834701596" version="1.0"/>
+</session>

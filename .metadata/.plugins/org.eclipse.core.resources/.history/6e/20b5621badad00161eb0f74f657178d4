@@ -1,0 +1,86 @@
+package theInfinityScore;
+
+import java.util.ArrayList;
+
+import processing.sound.SoundFile;
+
+public class Singer {
+	
+	InfinityScore parent;
+	TextToSpeech tts;
+	ArrayList<SoundFile> sf;
+	int numFiles;
+	int currentPlace = 0;
+	
+	
+//	public Singer(InfinityScore _parent, ArrayList<SoundFile> _lyrics){
+//			parent = _parent;
+//		  tts = new TextToSpeech();
+//		  tts.setVoice("dfki-poppy-hsmm");
+//		  tts.saveTTSfile("testing");
+//		  lyrics = new ArrayList<SoundFile>();
+//		  
+//		  for (SoundFile sf : _lyrics){
+//			  lyrics.add(sf);
+//		  }		 	
+//		
+//	}
+	
+	public Singer(InfinityScore _parent){
+		parent = _parent;
+		sf = new ArrayList<SoundFile>();
+	  tts = new TextToSpeech();
+	  tts.setVoice("dfki-poppy-hsmm");
+	  tts.saveTTSfile("testing");
+	  //lyrics = new ArrayList<SoundFile>();
+	  
+	  //initSoundFiles();	 	
+	
+}
+	
+	public void realTimeReciteLyrics(String lyrics){
+		tts.speak(lyrics, 2.0f, false, true);
+	}
+	
+	public void recordSoundFiles(ArrayList<String> l){
+		
+		numFiles = l.size();
+		if ( parent.verbose) System.out.println("recordSoundFiles: "+ numFiles + " is size of String Array List");
+		for (int i = 0; i < l.size(); i++){
+			tts.saveTTSfile(l.get(i), i);
+			//tts.saveTTSfile(parent.libretto.headline);
+			if (parent.verbose) System.out.println("recordSoundFiles: saved" + i);
+		}
+		initSoundFiles(numFiles);
+	}
+	
+	public void playSoundFile(int index){
+		SoundFile k = sf.get(index);
+		k.play();		
+	}
+	
+
+	
+	public void singNext(){
+		playSoundFile(currentPlace);
+		int x = Die.getRoll(.75f, .25f);
+		if( x == 1) currentPlace++;	
+	}
+	
+	public void initSoundFiles(int num){
+		sf.clear();
+		for(int i = 0; i < num; i ++){
+		SoundFile s= new SoundFile(parent, "/soundFiles/" + i + ".wav");
+		sf.add(s);
+		}
+		if (parent.verbose) System.out.println("initSoundFiles: " + sf.size() + " is size of SoundFile arrayList");
+	}
+	
+	public void clearSoundFiles(){	
+			sf.clear();	
+			
+	}
+		
+	
+
+}

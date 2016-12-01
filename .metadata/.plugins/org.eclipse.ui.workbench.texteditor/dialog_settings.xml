@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="265" key="DIALOG_WIDTH"/>
-		<item value="306" key="DIALOG_Y_ORIGIN"/>
-		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="141" key="DIALOG_X_ORIGIN"/>
+		<item value="413" key="DIALOG_Y_ORIGIN"/>
+		<item value="400" key="DIALOG_HEIGHT"/>
+		<item value="590" key="DIALOG_X_ORIGIN"/>
 		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,11 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="translate" key="selection"/>
+		<item value="7&quot;" key="selection"/>
 		<list key="findhistory">
-			<item value="translate"/>
+			<item value="2&quot;"/>
+			<item value="f)"/>
+			<item value="f*3"/>
+			<item value="celloSamples"/>
+			<item value="violinSamples"/>
+			<item value="2"/>
+			<item value="chordcount"/>
+			<item value="trillactive"/>
 		</list>
 		<list key="replacehistory">
+			<item value="7&quot;"/>
+			<item value="f*32)"/>
+			<item value="f*16)"/>
+			<item value="6&quot;"/>
+			<item value="5&quot;"/>
+			<item value="f*8)"/>
+			<item value="f*4"/>
+			<item value="4&quot;"/>
 		</list>
 	</section>
 </section>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/base/core/core.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/jl1.0.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/jsminim.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/minim.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/tritonus_aos.jar"/>
+	<classpathentry kind="lib" path="lib/base/minim/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-linux-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-linux-armv6hf.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-linux-i586.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-macosx-universal.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="lib/base/core/jogl-all.jar"/>
+	<classpathentry kind="lib" path="lib/base/net/net.jar"/>
+	<classpathentry kind="lib" path="lib/base/video/video.jar"/>
+	<classpathentry kind="lib" path="lib/user/toxiclibs-complete-0020/colorutils/library/colorutils.jar"/>
+	<classpathentry kind="lib" path="lib/user/sound/library/sound.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="HueyLewisAndTheNews/lib/user/sound/library/macosx"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/user/json/library/json.jar"/>
+	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-builder-5.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-lang-en-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/user/maryTTS/voice-cmu-slt-hsmm-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/user/maryTTS/voice-dfki-poppy-hsmm-5.1.jar"/>
+	<classpathentry kind="lib" path="lib/user/maryTTS/voice-dfki-prudence-hsmm-5.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -2,8 +2,30 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="polygonizer.Polygonizer"/>
 <fullyQualifiedTypeName name="processing.core.PConstants"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="processing.core.PVector"/>
 <fullyQualifiedTypeName name="processing.core.PShape"/>
 <fullyQualifiedTypeName name="reference.beesandbombs.motionblur.MotionBlur"/>
+<fullyQualifiedTypeName name="processing.core.PImage"/>
+<fullyQualifiedTypeName name="sun.org.mozilla.javascript.internal.ast.ForInLoop"/>
+<fullyQualifiedTypeName name="toxi.color.TColor"/>
+<fullyQualifiedTypeName name="processing.core.PApplet.RendererChangeException"/>
+<fullyQualifiedTypeName name="com.mitchellfchan.sketchbook.testSpeech.TestSpeech"/>
+<fullyQualifiedTypeName name="marytts.modules.synthesis.Voice"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.AudioFileFormat"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="processing.sound.SoundFile"/>
+<fullyQualifiedTypeName name="processing.core.PGraphics"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="processing.data.JSONArray"/>
+<fullyQualifiedTypeName name="processing.core.PApplet"/>
+<fullyQualifiedTypeName name="ddf.minim.AudioOutput"/>
+<fullyQualifiedTypeName name="ddf.minim.ugens.Instrument"/>
+<fullyQualifiedTypeName name="com.sun.j3d.audioengines.Sample"/>
+<fullyQualifiedTypeName name="ddf.minim.ugens.Sampler"/>
+<fullyQualifiedTypeName name="ddf.minim.Minim"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="ddf.minim.UGen.UGenInput"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>
