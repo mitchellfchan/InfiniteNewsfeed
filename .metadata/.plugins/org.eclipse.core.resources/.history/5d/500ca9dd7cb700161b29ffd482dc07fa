@@ -12,8 +12,7 @@ public class Singer {
 	InfinityScore parent;
 	Minim minim;
 
-	//TextToSpeech tts;
-	BingSpeech bs;
+	TextToSpeech tts;
 	ArrayList<Sampler> samples;
 	ArrayList<Vocoder> vocoders;
 //Vocoder vocode;
@@ -52,7 +51,7 @@ public class Singer {
 		numFiles = l.size();
 		if ( parent.verbose) System.out.println("recordSoundFiles: "+ numFiles + " is size of String Array List");
 		for (int i = 0; i < l.size(); i++){
-			//tts.saveTTSfile(l.get(i), i);
+			tts.saveTTSfile(l.get(i), i);
 			//tts.saveTTSfile(parent.libretto.headline);    //this would save the whole headline
 			if (parent.verbose) System.out.println("recordSoundFiles: saved" + i);
 		}

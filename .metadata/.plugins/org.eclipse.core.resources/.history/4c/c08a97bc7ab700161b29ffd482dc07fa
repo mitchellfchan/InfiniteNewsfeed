@@ -1,0 +1,9 @@
+package theInfinityScore;
+
+public class Soprano {
+
+	public Soprano() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

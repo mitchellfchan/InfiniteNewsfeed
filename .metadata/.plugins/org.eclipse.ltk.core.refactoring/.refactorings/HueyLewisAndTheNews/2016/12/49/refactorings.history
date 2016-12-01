@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;theInfinityScore.Soprano&apos; to &apos;BingSpeech&apos;&#x0A;- Original project: &apos;HueyLewisAndTheNews&apos;&#x0A;- Original element: &apos;theInfinityScore.Soprano&apos;&#x0A;- Renamed element: &apos;theInfinityScore.BingSpeech&apos;&#x0A;- Update references to refactored element&#x0A;- Rename similarly named elements&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Soprano&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;theInfinityScore{Soprano.java[Soprano" matchStrategy="1" name="BingSpeech" qualified="false" references="true" similarDeclarations="true" stamp="1480565569943" textual="false" version="1.0"/>
+</session>

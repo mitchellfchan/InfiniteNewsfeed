@@ -67,8 +67,8 @@ public class InfinityScore extends PApplet{
 		//singer.recordSoundFiles(libretto.words);
 		//singer.realTimeReciteLyrics(libretto.headline);
 		
-		bingSpeech = new BingSpeech();
-		bingSpeech.recordThis("I am a genius", 69);
+		bingSpeech = new BingSpeech(this);
+		bingSpeech.recordThis("I am a genius");
 		
 	  size(400, 400);
 	  background(255);

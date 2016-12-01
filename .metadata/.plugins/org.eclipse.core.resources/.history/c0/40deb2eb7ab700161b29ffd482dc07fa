@@ -29,8 +29,7 @@ public class InfinityScore extends PApplet{
  	Die d6;
  	Die d20;
  	Lyricist libretto;
- 	//Singer singer;
- 	BingSpeech bingSpeech;
+ 	Singer singer;
  	Conductor conductor;
  	Cello cello;
  	Violin violin;
@@ -63,12 +62,9 @@ public class InfinityScore extends PApplet{
 		libretto.getHeadlines();
 		libretto.splitHeadlines();
 		
-		//singer = new Singer(this);
+		singer = new Singer(this);
 		//singer.recordSoundFiles(libretto.words);
 		//singer.realTimeReciteLyrics(libretto.headline);
-		
-		bingSpeech = new BingSpeech();
-		bingSpeech.recordThis("I am a genius", 69);
 		
 	  size(400, 400);
 	  background(255);
