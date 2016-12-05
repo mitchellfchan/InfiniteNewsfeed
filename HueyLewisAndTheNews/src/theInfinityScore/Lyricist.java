@@ -26,13 +26,16 @@ public class Lyricist {
 	JSONArray nytArray;
 	JSONObject entry;
 	String headline;
+	String headlineNew;
 	int numWords;
 	
 	
 	ArrayList<String> words;
+	ArrayList<String> wordsNew;
 	
 	public Lyricist(InfinityScore _parent){
 		parent = _parent;
+		words = new ArrayList<String>();
 		
 	}
 	
@@ -48,22 +51,23 @@ public class Lyricist {
 			  nytArray = nytData.getJSONArray("results");
 			  //println(nytArray);
 
+			  int whichHeadline = (int)parent.random(nytArray.size() - 1);	
 			  entry = nytArray.getJSONObject(0);
 			  //println(entry);
 
 			  headline = entry.getString("title");
 			 System.out.println(headline);
-			 words = new ArrayList<String>();
+			 
 
 			}
 	
 	public void splitHeadlines(){
-		String[] list = parent.split(headline, ',');
+//		String[] list = parent.split(headline, ',');
 //		if (parent.verbose) System.out.println("   splitHeadlines: # of clauses in headline: " + list.length);
 //		if (list.length < 2){
-			list = parent.split(headline,  " ");
+			String [] list = parent.split(headline,  " ");
 			//if (parent.verbose)System.out.println("   splitHeadlines: There were no commas in the headline, so we are splitting by spaces instead.");
-			if (parent.verbose)System.out.println("   spliteHeadlines: # of words in headline: " + list.length);
+			if (parent.verbose)System.out.println("   splitHeadlines: # of words in headline: " + list.length);
 		//}
 		numWords = list.length;
 		for(int i = 0; i < list.length; i++){

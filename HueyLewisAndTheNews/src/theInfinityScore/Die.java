@@ -26,6 +26,20 @@ public class Die {
 		
 	}
 	
+	public static int getRoll(float prob1, float prob2, float prob3){
+		double roll = Math.random();
+			if (roll >= (1-prob1)) {
+				return 1;
+			} else if (roll > (1-prob2-prob1)){
+				return 2;
+			} else if (roll > (1-prob3-prob2-prob1)){
+				return 3;
+			} else {
+				return 0;
+			}
+		
+	}
+	
 //	public int pickWeightedValue(int orig, int prob1, int prob2, int prob3) {
 //		 
 //		int roll = (int)parent.random(0, 100);

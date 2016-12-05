@@ -9,6 +9,7 @@ import ddf.minim.ugens.*;
 
 
 public class Cello implements Instrument{
+	boolean verbose = false;
 	InfinityScore parent;
 	Minim minim;
 	String[] notes = {	"C2", "Cs2", "D2", "Ds2", "E2", "F2", "Fs2", "G2", "Gs2", "A2", "As2", "B2",
@@ -40,7 +41,7 @@ public class Cello implements Instrument{
 		for(int i = 0; i < newMelody.length; i++){
 			melody.add(newMelody[i]);
 		}
-		if (parent.verbose) System.out.println ("Created a " + melody.size() + " note Bass Line");		
+		if (verbose) System.out.println ("Created a " + melody.size() + " note Bass Line");		
 	}
 	
 	public void initSamplesScale(String newRoot, int[] scaleNotes){
@@ -58,7 +59,7 @@ public class Cello implements Instrument{
 		}
 		
 		theSamples.clear();
-		if (parent.verbose) {
+		if (verbose) {
 			System.out.println("cleared theSamples. Array List contains: " + theSamples.size() + " entries");
 		}
 
@@ -66,7 +67,7 @@ public class Cello implements Instrument{
 		for(int i = 0; i < scaleNotes.length; i++){
 			System.out.println (root + notes[scaleNotes[i]]);
 			Sampler sam = new Sampler(parent.sketchPath + "/samples/cello_1/cello_" + notes[root + scaleNotes[i]] + "_1_forte_arco-normal.wav", 2, minim);
-			if(parent.verbose) System.out.println ("Made " + notes[root + scaleNotes[i]]);
+			if(verbose) System.out.println ("Made " + notes[root + scaleNotes[i]]);
 			theSamples.add(sam);
 		}
 		
@@ -76,7 +77,13 @@ public class Cello implements Instrument{
 		
 	}
 	
-	
+	public String getCurrentNoteString(){
+		int indexInScale =  melody.get(currentNote);
+		int stepsInChromatic = parent.conductor.majorScale[indexInScale];
+		String theNote = notes[root + stepsInChromatic];
+		return(theNote);
+		
+	}
 	public void resetNext(){
 		//later, do something creative here
 		currentNote = 0;
@@ -87,7 +94,7 @@ public class Cello implements Instrument{
 
 	
 		theSamples.get(melody.get(currentNote)).trigger();
-		if(parent.verbose){
+		if(verbose){
 			System.out.println("Playing Cello Note " + melody.get(currentNote));
 		}
 		currentNote++;

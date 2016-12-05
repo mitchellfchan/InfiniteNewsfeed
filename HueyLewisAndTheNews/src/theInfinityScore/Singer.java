@@ -8,16 +8,20 @@ import ddf.minim.ugens.*;
 import processing.sound.SoundFile;
 
 public class Singer {
-	
+	boolean verbose = false;
 	InfinityScore parent;
 	Minim minim;
 
-	//TextToSpeech tts;
+
 	BingSpeech bs;
+	boolean tPainMode = false;
 	ArrayList<Sampler> samples;
+	ArrayList<Sampler> samplesTPain;
 	ArrayList<Vocoder> vocoders;
-//Vocoder vocode;
-	//Sampler testSampler;
+	Summer synth;
+	Oscil oscil1;
+	Oscil oscil2;
+
 	HashMap<String, Float> noteFreqs;
 	
 	int hitOn = 4;
@@ -31,40 +35,56 @@ public class Singer {
 
 		noteFreqs = new HashMap<String, Float>();
 		initNoteHashMap();
-//
 		samples = new ArrayList<Sampler>();
+		samplesTPain = new ArrayList<Sampler>();
+		
 		vocoders = new ArrayList<Vocoder>();
+		synth = new Summer();
+		
+		oscil1 = new Oscil(440f, 0.8f, Waves.SAW);
+		oscil2 = new Oscil(880f, 0.8f, Waves.SAW);
 		
 		bs = new BingSpeech();
-//
-//	
-//	  tts = new TextToSpeech();
-//	  tts.setVoice("dfki-poppy-hsmm");
-//	  tts.saveTTSfile("testing");	
+
 }
 	
 
 	
-
+	
 	
 	public void recordSoundFiles(ArrayList<String> l){
 		
 		numFiles = l.size();
 		if ( parent.verbose) System.out.println("recordSoundFiles: "+ numFiles + " is size of String Array List");
 		for (int i = 0; i < l.size(); i++){
-			//tts.saveTTSfile(l.get(i), i);
-			//tts.saveTTSfile(parent.libretto.headline);    //this would save the whole headline
+			bs.recordThis(l.get(i), i);	
 			if (parent.verbose) System.out.println("recordSoundFiles: saved" + i);
 		}
 		initSoundFiles(numFiles);
 	}
 	
 	
-	public void playSample(int index){
+	
+	
+	public void playSample(int index, boolean vocoded){
+		Sampler s;
+		if(vocoded){
+		s = samplesTPain.get(index);
+		System.out.println(parent.violin.getCurrentNoteString());
+		String noteS = parent.violin.getCurrentNoteString();
+		float noteF = noteFreqs.get(noteS);
 
-		Sampler s = samples.get(index);		
-		//oscil1.setFrequency(noteFreqs.get(parent.violin.getCurrentNoteString()));
-		//s.patch(parent.out);
+		Summer sum = new Summer();
+		Oscil test = new Oscil(noteF*0.5f, 0.5f, Waves.SAW);
+		Oscil test2 = new Oscil(noteFreqs.get(parent.cello.rootString)*2, 0.2f, Waves.SAW);
+		test.patch(sum);
+		test2.patch(sum);
+		sum.patch(vocoders.get(index));
+		} else {
+			s = samples.get(index);
+		}
+		
+		
 		s.trigger();
 	}
 	
@@ -72,40 +92,47 @@ public class Singer {
 	
 	public void singNext(){
 
-		playSample(currentPlace);
-		if (parent.verbose) System.out.println(currentPlace + " / " + samples.size() + " words in array" );
-		int x = Die.getRoll(.75f, .25f);
+		playSample(currentPlace, false);
+	
+		if (verbose) System.out.println(currentPlace + " / " + samples.size() + " words in array" );
+		int x = Die.getRoll(.75f, .15f, 0.09f);
 		if( x == 1) currentPlace++;
+		if(x == 3 && currentPlace > 1) currentPlace--; 
 		if(currentPlace >= samples.size()){
-			currentPlace = (int)(Math.random()*samples.size());
+			currentPlace = (int)(Math.random()*(samples.size()-1));
+			if(verbose) System.out.println("End of word String");
 		}
 	}
 	
 	public void initSoundFiles(int num){
 
 		samples.clear();
+		samplesTPain.clear();
+		for (Vocoder v : vocoders){
+			synth.unpatch(v);
+		}
 		vocoders.clear();
+		synth.unpatch(parent.out);
 		String path = parent.sketchPath + "/soundFiles/";
 		if (parent.verbose) System.out.println(path + " is where we're searching for those files.");
 		for(int i = 0; i < num; i ++){
 	
-		Sampler sa = new Sampler(path + i + ".wav", 4, minim);
-		Vocoder v = new Vocoder(1024, 8);
-		vocoders.add(v);
-		//sa.patch(parent.out);
-		sa.patch(v.modulator);
-//		Oscil wave1 = new Oscil(220f, 0.8f, Waves.SAW);
-//		Oscil wave2 = new Oscil(260f, 0.6f, Waves.SAW);
-//		Summer synth = new Summer();
-//		wave1.patch(synth);
-//		wave2.patch(synth);
-//		synth.patch(v).patch(parent.out);
-		//summer.patch(v).patch(parent.out);
+		Sampler sa      = new Sampler(path + i + ".pcm", 4, minim);
+		Sampler saTPain = new Sampler(path + i + ".pcm", 4, minim);
+	
+		sa.patch(parent.out);
 		samples.add(sa);
 		
-		if (parent.verbose)System.out.println(samples.iterator()); 
+		Vocoder v = new Vocoder(1024, 8);
+		vocoders.add(v);
+		saTPain.patch(v.modulator);
+		v.patch(parent.out);
+
+		samplesTPain.add(saTPain);
+		
+		if (verbose)System.out.println("SINGER: " + samples.iterator()); 
 		}
-		if (parent.verbose) System.out.println("initSoundFiles: " + samples.size() + " is size of Sampler arrayList");
+		if (verbose) System.out.println("SINGER: initSoundFiles: " + samples.size() + " is size of Sampler arrayList");
 	}
 	
 	
