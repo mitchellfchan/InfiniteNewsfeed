@@ -1,0 +1,9 @@
+package theInfinityScore;
+
+public class makeNewLyrics {
+
+	public makeNewLyrics() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

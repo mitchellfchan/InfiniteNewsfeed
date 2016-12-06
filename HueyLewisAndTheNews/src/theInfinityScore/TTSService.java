@@ -51,7 +51,10 @@ public class TTSService {
         // Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
         // Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
     	
-    	Authentication auth = new Authentication("9d0a9cdfd3ec4f1ab3bcb134fbf322c6");
+    	Authentication auth = new Authentication("bd2cdba40fe7441aa026f435110ac689");
+    	//*I HAVE TWO KEYS:
+    	//bd2cdba40fe7441aa026f435110ac689
+    	//0d3a2ac722f34d2d81a159eb8c259265
         String accessToken = auth.GetAccessToken();
 
         HttpsURLConnection webRequest = HttpsConnection.getHttpsConnection(ttsServiceUri);

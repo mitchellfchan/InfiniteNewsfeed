@@ -33,9 +33,13 @@ public class Lyricist {
 	ArrayList<String> words;
 	ArrayList<String> wordsNew;
 	
+	boolean didGetHeadlines = false;
+	boolean didSplitHeadlines = false;
+	
 	public Lyricist(InfinityScore _parent){
 		parent = _parent;
 		words = new ArrayList<String>();
+		wordsNew = new ArrayList<String>();
 		
 	}
 	
@@ -52,7 +56,7 @@ public class Lyricist {
 			  //println(nytArray);
 
 			  int whichHeadline = (int)parent.random(nytArray.size() - 1);	
-			  entry = nytArray.getJSONObject(0);
+			  entry = nytArray.getJSONObject(whichHeadline);
 			  //println(entry);
 
 			  headline = entry.getString("title");
@@ -62,18 +66,20 @@ public class Lyricist {
 			}
 	
 	public void splitHeadlines(){
-//		String[] list = parent.split(headline, ',');
-//		if (parent.verbose) System.out.println("   splitHeadlines: # of clauses in headline: " + list.length);
-//		if (list.length < 2){
+		wordsNew.clear();
 			String [] list = parent.split(headline,  " ");
-			//if (parent.verbose)System.out.println("   splitHeadlines: There were no commas in the headline, so we are splitting by spaces instead.");
-			if (parent.verbose)System.out.println("   splitHeadlines: # of words in headline: " + list.length);
-		//}
+				if (parent.verbose)System.out.println("   splitHeadlines: # of words in headline: " + list.length);
 		numWords = list.length;
 		for(int i = 0; i < list.length; i++){
-			words.add(list[i]);
+			wordsNew.add(list[i]);
 		}
+		replaceArrayList(wordsNew);
 		
+	}
+	
+	public void replaceArrayList(ArrayList<String> _newWords){
+		words.clear();
+		words = new ArrayList<String>(_newWords);
 	}
 	
 	public void cleanString(){

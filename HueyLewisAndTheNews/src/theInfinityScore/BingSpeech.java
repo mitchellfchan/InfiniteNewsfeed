@@ -82,6 +82,7 @@ public class BingSpeech {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			//recordThis(_textToSynthesize, fileName);
 		}
 	}
 

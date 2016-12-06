@@ -1,5 +1,8 @@
 package theInfinityScore;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Conductor {
 	
 	final int c = 0;
@@ -29,6 +32,8 @@ public class Conductor {
 	
 	String bassRootString = "C2";
 	
+	Runnable newLyricsPlease;
+	ExecutorService executor = Executors.newCachedThreadPool();
 	
 	
 	
@@ -36,16 +41,18 @@ public class Conductor {
 	public Conductor(InfinityScore _parent, Metronome _m) {
 		parent = _parent;
 		m = _m;
-
+		newLyricsPlease = new makeNewLyrics(parent);
 		
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void run(){
+		//refreshLyrics();
 		
 		if(m.tock()){
 			if (parent.verbose) System.out.println("TOCK");
-	
+			
+			if(m.beatCount%32 ==0) executor.submit(newLyricsPlease);
 			
 			if(m.beatCount%parent.violin.hitOn == 0){
 				parent.out.playNote(0, 4.0f, parent.violin);
@@ -62,6 +69,16 @@ public class Conductor {
 		}
 		
 	
+	}
+	
+	public void refreshLyrics(){
+		System.out.println("Replacing Lyrics");
+		if (parent.singer.repeatCount > 2){
+			parent.libretto.getHeadlines();
+			parent.libretto.splitHeadlines();
+			parent.singer.recordSoundFiles(parent.libretto.words);
+			
+		}
 	}
 	
 	
