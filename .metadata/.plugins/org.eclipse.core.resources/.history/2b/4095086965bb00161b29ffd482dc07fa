@@ -78,13 +78,7 @@ public class Singer {
 	public void singNext() {
 		verbose = true;
 
-		try{
 		playSample(currentPlace, true);
-		}catch (IndexOutOfBoundsException e) {
-		    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
-		} catch (Exception e){
-			System.err.println(" 'FART!' --Singer");
-		}
 
 		if (verbose)
 			System.out.println(currentPlace + " / " + samples.size()
@@ -104,13 +98,6 @@ public class Singer {
 
 	public void initSoundFiles(int num) {
 	
-		for (Sampler s: samples){
-			s.unpatch(parent.out);
-		}
-		
-		for (Vocoder v: vocoders){
-			v.unpatch(parent.out);
-		}
 		vocoders.clear();
 
 		ArrayList<Sampler> tempSamples = new ArrayList<Sampler>();

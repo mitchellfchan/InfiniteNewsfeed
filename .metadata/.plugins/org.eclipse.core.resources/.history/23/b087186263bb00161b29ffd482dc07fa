@@ -8,7 +8,7 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public class makeNewLyrics implements Runnable {
-	int counter = 0;
+
 	private static InfinityScore parent;
 
 	String baseURL = "https://api.nytimes.com/svc/news/v3/content/all/";
@@ -40,13 +40,10 @@ public class makeNewLyrics implements Runnable {
 	}
 
 	public void run() {
-		
-		
-		System.out.println(counter + " Times Running This Thread!");
+		System.out.println("Hello from a thread!");
 		getHeadlines();
 		splitHeadlines();
-		recordSoundFiles(wordsNew);
-		counter++;
+		//recordSoundFiles(wordsNew);
 	}
 
 	public static void main(String args[]) {

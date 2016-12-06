@@ -18,6 +18,7 @@ public class Singer {
 	ArrayList<Sampler> samplesTPain;
 	ArrayList<Vocoder> vocoders;
 
+
 	HashMap<String, Float> noteFreqs;
 	int repeatCount = 0;
 	int hitOn = 4;
@@ -34,6 +35,7 @@ public class Singer {
 		samplesTPain = new ArrayList<Sampler>();
 
 		vocoders = new ArrayList<Vocoder>();
+
 
 		bs = new BingSpeech();
 
@@ -77,14 +79,8 @@ public class Singer {
 
 	public void singNext() {
 		verbose = true;
-
-		try{
+		
 		playSample(currentPlace, true);
-		}catch (IndexOutOfBoundsException e) {
-		    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
-		} catch (Exception e){
-			System.err.println(" 'FART!' --Singer");
-		}
 
 		if (verbose)
 			System.out.println(currentPlace + " / " + samples.size()
@@ -95,7 +91,7 @@ public class Singer {
 		if (x == 3 && currentPlace > 1)
 			currentPlace--;
 		if (currentPlace >= samples.size()) {
-			repeatCount++;
+			repeatCount ++;
 			currentPlace = (int) (Math.random() * (samples.size() - 1));
 			if (verbose)
 				System.out.println("End of word String");
@@ -103,18 +99,12 @@ public class Singer {
 	}
 
 	public void initSoundFiles(int num) {
-	
-		for (Sampler s: samples){
-			s.unpatch(parent.out);
-		}
-		
-		for (Vocoder v: vocoders){
-			v.unpatch(parent.out);
-		}
+
+		samples.clear();
+		samplesTPain.clear();
 		vocoders.clear();
 
-		ArrayList<Sampler> tempSamples = new ArrayList<Sampler>();
-		ArrayList<Sampler> tempSamplesTPain = new ArrayList<Sampler>();
+		
 		String path = parent.sketchPath + "/soundFiles/";
 		if (parent.verbose)
 			System.out.println(path
@@ -125,32 +115,21 @@ public class Singer {
 			Sampler saTPain = new Sampler(path + i + ".pcm", 4, minim);
 
 			sa.patch(parent.out);
-			tempSamples.add(sa);
+			samples.add(sa);
 
 			Vocoder v = new Vocoder(1024, 8);
 			vocoders.add(v);
 			saTPain.patch(v.modulator);
 			v.patch(parent.out);
 
-			tempSamplesTPain.add(saTPain);
-		}
+			samplesTPain.add(saTPain);
 
-			if (verbose){
-				System.out.println("SINGER: initSoundFiles: " + tempSamples.size()
-						+ " is size of Sampler arrayList");
-			}
-				
-		
-		samples.clear();
-		for (Sampler ts : tempSamples){
-			samples.add(ts);
+			if (verbose)
+				System.out.println("SINGER: " + samples.iterator());
 		}
-		samplesTPain.clear();
-		for (Sampler tstp : tempSamplesTPain){
-			samplesTPain.add(tstp);
-		}
-		
-		
+		if (verbose)
+			System.out.println("SINGER: initSoundFiles: " + samples.size()
+					+ " is size of Sampler arrayList");
 	}
 
 	public void clearSamples() {

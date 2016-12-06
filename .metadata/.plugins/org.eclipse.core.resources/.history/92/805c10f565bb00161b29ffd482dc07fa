@@ -79,7 +79,7 @@ public class Singer {
 		verbose = true;
 
 		try{
-		playSample(currentPlace, true);
+		playSample(currentPlace, false);
 		}catch (IndexOutOfBoundsException e) {
 		    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
 		} catch (Exception e){

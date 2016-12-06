@@ -104,13 +104,6 @@ public class Singer {
 
 	public void initSoundFiles(int num) {
 	
-		for (Sampler s: samples){
-			s.unpatch(parent.out);
-		}
-		
-		for (Vocoder v: vocoders){
-			v.unpatch(parent.out);
-		}
 		vocoders.clear();
 
 		ArrayList<Sampler> tempSamples = new ArrayList<Sampler>();

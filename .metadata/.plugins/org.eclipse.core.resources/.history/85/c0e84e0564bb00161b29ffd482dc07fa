@@ -52,7 +52,7 @@ public class Conductor {
 		if(m.tock()){
 			if (parent.verbose) System.out.println("TOCK");
 			
-			if(m.beatCount == 32) executor.submit(newLyricsPlease);
+			if(m.beatCount%32 ==0) executor.submit(newLyricsPlease);
 			
 			if(m.beatCount%parent.violin.hitOn == 0){
 				parent.out.playNote(0, 4.0f, parent.violin);
