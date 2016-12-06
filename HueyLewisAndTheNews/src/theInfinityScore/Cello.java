@@ -10,6 +10,9 @@ import ddf.minim.ugens.*;
 
 public class Cello implements Instrument{
 	boolean verbose = false;
+	int tolerableRepetition = 4;
+	int repeatCount = 0;
+	
 	InfinityScore parent;
 	Minim minim;
 	String[] notes = {	"C2", "Cs2", "D2", "Ds2", "E2", "F2", "Fs2", "G2", "Gs2", "A2", "As2", "B2",
@@ -86,7 +89,12 @@ public class Cello implements Instrument{
 	}
 	public void resetNext(){
 		//later, do something creative here
+		repeatCount++;
 		currentNote = 0;
+	}
+	
+	public void resetRepeatCount(){
+		repeatCount = 0;
 	}
 	
 	public void noteOn(float dur){

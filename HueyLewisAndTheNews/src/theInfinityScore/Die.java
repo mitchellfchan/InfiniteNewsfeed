@@ -14,6 +14,15 @@ public class Die {
 		return (val + 1);
 	}
 	
+	public static boolean getBool(float prob1){
+		double roll = Math.random();
+		if (roll >= (1-prob1)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public static int getRoll(float prob1, float prob2){
 		double roll = Math.random();
 			if (roll >= (1-prob1)) {

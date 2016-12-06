@@ -8,7 +8,15 @@ import ddf.minim.ugens.*;
 import processing.sound.SoundFile;
 
 public class Singer {
-	boolean verbose = false;
+
+//---------------------CHANGE FOR FUN TIMES-----------------
+	boolean verbose = true;
+	int repeatCount = 0;
+	int tolerableRepetition = 10;
+	int hitOn = 4;
+//----------------------------------------------------------
+	
+	
 	InfinityScore parent;
 	Minim minim;
 
@@ -19,8 +27,7 @@ public class Singer {
 	ArrayList<Vocoder> vocoders;
 
 	HashMap<String, Float> noteFreqs;
-	int repeatCount = 0;
-	int hitOn = 4;
+
 	int numFiles;
 	int currentPlace = 0;
 
@@ -39,20 +46,6 @@ public class Singer {
 
 	}
 
-	public void recordSoundFiles(ArrayList<String> l) {
-		repeatCount = 0;
-		numFiles = l.size();
-		if (parent.verbose)
-			System.out.println("recordSoundFiles: " + numFiles
-					+ " is size of String Array List");
-		for (int i = 0; i < l.size(); i++) {
-			bs.recordThis(l.get(i), i);
-			if (parent.verbose)
-				System.out.println("recordSoundFiles: saved" + i);
-		}
-		initSoundFiles(numFiles);
-	}
-
 	public void playSample(int index, boolean vocoded) {
 		Sampler s;
 		if (vocoded) {
@@ -62,53 +55,71 @@ public class Singer {
 			float noteF = noteFreqs.get(noteS);
 
 			Summer sum = new Summer();
-			Oscil test = new Oscil(noteF * 0.5f, 0.5f, Waves.SAW);
+			Oscil test = new Oscil(noteF * 0.5f, 0.8f, Waves.SAW);
 			Oscil test2 = new Oscil(noteFreqs.get(parent.cello.rootString) * 2,
-					0.2f, Waves.SAW);
+					0.5f, Waves.SAW);
 			test.patch(sum);
 			test2.patch(sum);
 			sum.patch(vocoders.get(index));
+			s.trigger();
+			//sum.unpatch(vocoders.get(index));
+			//test2.unpatch(sum);
+			//test.unpatch(sum);
 		} else {
 			s = samples.get(index);
+			s.trigger();
 		}
 
-		s.trigger();
+	
+		
+		if(vocoded){
+		
+			
+		}
 	}
 
 	public void singNext() {
-		verbose = true;
 
-		try{
-		playSample(currentPlace, true);
-		}catch (IndexOutOfBoundsException e) {
-		    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
-		} catch (Exception e){
+		try {
+			playSample(currentPlace, Die.getBool(0.33f));
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+		} catch (Exception e) {
 			System.err.println(" 'FART!' --Singer");
 		}
 
 		if (verbose)
-			System.out.println(currentPlace + " / " + samples.size()
+			System.out.println("SINGER: Singing "+ currentPlace + " / " + samples.size()
 					+ " words in array");
+
 		int x = Die.getRoll(.75f, .15f, 0.09f);
 		if (x == 1)
 			currentPlace++;
+		if (x == 2)
+			currentPlace = currentPlace;
 		if (x == 3 && currentPlace > 1)
 			currentPlace--;
+
 		if (currentPlace >= samples.size()) {
 			repeatCount++;
+			if(Die.getBool(0.25f)){
+				currentPlace = 0;
+			} else {
 			currentPlace = (int) (Math.random() * (samples.size() - 1));
+			}
 			if (verbose)
-				System.out.println("End of word String");
+				System.out.println("SINGER: End of word String. Repeated "
+						+ repeatCount + " times.");
 		}
 	}
 
 	public void initSoundFiles(int num) {
-	
-		for (Sampler s: samples){
+
+		for (Sampler s : samples) {
 			s.unpatch(parent.out);
 		}
-		
-		for (Vocoder v: vocoders){
+
+		for (Vocoder v : vocoders) {
 			v.unpatch(parent.out);
 		}
 		vocoders.clear();
@@ -127,7 +138,7 @@ public class Singer {
 			sa.patch(parent.out);
 			tempSamples.add(sa);
 
-			Vocoder v = new Vocoder(1024, 8);
+			Vocoder v = new Vocoder(1024, 4);
 			vocoders.add(v);
 			saTPain.patch(v.modulator);
 			v.patch(parent.out);
@@ -135,29 +146,27 @@ public class Singer {
 			tempSamplesTPain.add(saTPain);
 		}
 
-			if (verbose){
-				System.out.println("SINGER: initSoundFiles: " + tempSamples.size()
-						+ " is size of Sampler arrayList");
-			}
-				
-		
+		if (verbose) {
+			System.out.println("SINGER: initSoundFiles: " + tempSamples.size()
+					+ " is size of Sampler arrayList");
+		}
+
 		samples.clear();
-		for (Sampler ts : tempSamples){
+		for (Sampler ts : tempSamples) {
 			samples.add(ts);
 		}
 		samplesTPain.clear();
-		for (Sampler tstp : tempSamplesTPain){
+		for (Sampler tstp : tempSamplesTPain) {
 			samplesTPain.add(tstp);
 		}
 		
-		
-	}
-
-	public void clearSamples() {
-
-		samples.clear();
+		currentPlace = 0;
 
 	}
+
+public void resetRepeatCount(){
+	repeatCount = 0;
+}
 
 	public void initNoteHashMap() {
 		noteFreqs.put("C2", 65.41f);

@@ -33,6 +33,7 @@ public class Violin implements Instrument {
 	int root = 0;
 	int currentNote = 0;
 	int lastNote = -1;
+	boolean doneMelody = false;
 
 	public Violin(InfinityScore _parent, String _fileId1, String _fileId2) {
 		
@@ -89,7 +90,7 @@ public class Violin implements Instrument {
 				System.out.println("Made " + notes[root + scaleNotes[i]]);
 			theSamples.add(sam);
 			} catch (Exception e) {
-				System.out.println("ERROR in InitSamplesScale: file doesn't exist!");
+				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist!");
 			}
 		}
 		
@@ -115,8 +116,9 @@ public class Violin implements Instrument {
 	}
 
 	public void resetNext() {
-		// later, do something creative here
-		//newMelody.clear();
+		
+		doneMelody = true;
+		
 		int[] newMelodyArray = {(int)parent.random(6), (int)parent.random(6), (int)parent.random(6)};
 		setMelody(newMelodyArray);
 		

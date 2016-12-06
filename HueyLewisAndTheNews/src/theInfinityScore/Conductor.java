@@ -41,18 +41,20 @@ public class Conductor {
 	public Conductor(InfinityScore _parent, Metronome _m) {
 		parent = _parent;
 		m = _m;
-		newLyricsPlease = new makeNewLyrics(parent);
+		newLyricsPlease = new Lyricist(parent);
+		executor.submit(newLyricsPlease);
 		
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void run(){
-		//refreshLyrics();
+	
+		refreshLyrics();
+		refreshBassLine();
 		
 		if(m.tock()){
 			if (parent.verbose) System.out.println("TOCK");
 			
-			if(m.beatCount == 32) executor.submit(newLyricsPlease);
 			
 			if(m.beatCount%parent.violin.hitOn == 0){
 				parent.out.playNote(0, 4.0f, parent.violin);
@@ -72,14 +74,35 @@ public class Conductor {
 	}
 	
 	public void refreshLyrics(){
-		System.out.println("Replacing Lyrics");
-		if (parent.singer.repeatCount > 2){
-			parent.libretto.getHeadlines();
-			parent.libretto.splitHeadlines();
-			parent.singer.recordSoundFiles(parent.libretto.words);
+		if (parent.singer.repeatCount >= parent.singer.tolerableRepetition){
+			parent.singer.resetRepeatCount();
+			executor.submit(newLyricsPlease);
+		}
+	}
+	
+	public void refreshMelody(){
+		if(parent.violin.doneMelody){
 			
 		}
 	}
+	
+	public void refreshBassLine(){
+		
+		if(parent.cello.repeatCount >= parent.cello.tolerableRepetition){
+			parent.cello.resetRepeatCount();
+			int toChange = (int)parent.random(coreBassLine.length);
+			if(Die.getBool(0.75f)){	
+			coreBassLine[toChange] = (int)parent.random(7);
+			} else {
+				coreBassLine[toChange] = 0;
+			}
+			parent.cello.setMelody(coreBassLine);
+			
+			
+		}
+	}
+	
+
 	
 	
 	

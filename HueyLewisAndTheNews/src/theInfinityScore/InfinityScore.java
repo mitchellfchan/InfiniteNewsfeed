@@ -28,7 +28,7 @@ public class InfinityScore extends PApplet{
  	//AudioPlayer audioplayer;
  	Die d6;
  	Die d20;
- 	Lyricist libretto;
+ 	
  	Singer singer;
  	
  	Conductor conductor;
@@ -44,7 +44,7 @@ public class InfinityScore extends PApplet{
 	public void setup() {
 		//TextToSpeech theTTS = new TextToSpeech();
 		  minim = new Minim(this);
-		  out = minim.getLineOut(Minim.STEREO, 1024);
+		  out = minim.getLineOut(Minim.MONO, 4096);
 		
 		metro = new Metronome(this);
 		conductor = new Conductor(this, metro);
@@ -59,13 +59,10 @@ public class InfinityScore extends PApplet{
 		violin.setMelody(conductor.coreMelody);
 		
 		
-		libretto = new Lyricist(this);
-		libretto.getHeadlines();
-		libretto.splitHeadlines();
+	
 		
 		singer = new Singer(this);
-		singer.recordSoundFiles(libretto.words);
-		//singer.initSoundFiles(libretto.words.size());
+
 	
 		
 	  size(400, 400);
