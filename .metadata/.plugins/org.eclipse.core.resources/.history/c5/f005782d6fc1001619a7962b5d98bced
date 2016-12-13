@@ -19,11 +19,11 @@ public class Conductor {
 	Metronome m;
 	
 
-//	int decision = 1;
-//	int dDie = 100;
-//	int dMelodyProb = 55;
-//	int dChordProb = 25;
-//	int dRestProb = 6;
+	int decision = 1;
+	int dDie = 100;
+	int dMelodyProb = 55;
+	int dChordProb = 25;
+	int dRestProb = 6;
 
 	int[] majorScale = { 0, 2, 4, 5, 7, 9, 11 };
 	int[] minorScale = { 0, 2, 3, 5, 7, 8, 10 };
@@ -58,11 +58,6 @@ public class Conductor {
 		refreshBassLine();
 
 		if (m.tock()) {
-			//System.out.println(beatCount);
-			if (m.beatCount == 160){
-				keyChange(parent.violin);
-			}
-			
 			if (m.beatCount % parent.violin.hitOn == 0) {
 				parent.out.playNote(0, 4.0f, parent.violin);
 			}
@@ -75,18 +70,15 @@ public class Conductor {
 		}
 	}
 
-	public void keyChange(Violin v){
+	public void keyChange(){
 		/*
 		 * hmmmm... OK, I think you should be able to change an octave, or up a third, or a fourth, or, well... I guess anything is good
 		 */
 		int newKey = (int)parent.random(7);
-		rootBassInt = newKey;   
+		rootBassInt = newKey + 1;   //I don't like representing the root as 0, like in computer notation. Wanna start calling the root "1", the fifth "5", the octave "8", etcetera
 		melodyOctaveGap += (int)parent.random(-1, 2);
 		melodyHarmony = (int)parent.random(7);
-		rootMelodyInt = rootBassInt +12*melodyOctaveGap + melodyHarmony;
-		//if(isBass) v.initSamplesScale(notes[], scaleNotes);
-		if (verbose) System.out.println("CONDUCTOR // keyChange : changing violin to key " + notes[rootMelodyInt]);
-		v.initSamplesScale(notes[rootMelodyInt], relatedKeys.get(melodyHarmony));
+		rootMelodyInt = rootBassInt +12*melodyOctaveGap + melodyHarmony ;
 	}
 	
 	public void refreshLyrics() {

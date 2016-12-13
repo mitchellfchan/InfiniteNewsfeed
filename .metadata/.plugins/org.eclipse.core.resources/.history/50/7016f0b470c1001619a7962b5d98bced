@@ -58,8 +58,7 @@ public class Conductor {
 		refreshBassLine();
 
 		if (m.tock()) {
-			//System.out.println(beatCount);
-			if (m.beatCount == 160){
+			if (m.beatCount == 16){
 				keyChange(parent.violin);
 			}
 			

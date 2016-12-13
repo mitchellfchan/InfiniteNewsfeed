@@ -25,7 +25,7 @@ public class InfinityScore extends PApplet{
 	
 	boolean verbose = true;
  	Metronome metro;
- 	
+ 	//AudioPlayer audioplayer;
  	Die d6;
  	Die d20;
  	

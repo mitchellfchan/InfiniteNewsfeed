@@ -31,7 +31,6 @@ public class Singer {
 
 	int numFiles;
 	int currentPlace = 0;
-	int lastPlace = 0;
 
 	public Singer(InfinityScore _parent) {
 		parent = _parent;
@@ -84,11 +83,10 @@ public class Singer {
 
 		try {
 			playSample(currentPlace, Die.getBool(0.33f));
-			lastPlace = currentPlace;
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("SINGER : IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
 		} catch (Exception e) {
-			System.err.println("SINGER: 'FART!' --Singer");
+			System.err.println(" 'FART!' --Singer");
 		}
 
 		if (verbose)
@@ -173,7 +171,7 @@ public void resetRepeatCount(){
 
 public void display(){
 	for(int i = 0; i < lyrics.size(); i++){
-		if(i == (lastPlace)){
+		if(i == currentPlace){
 			parent.fill(parent.gui.hilightColor.toARGB());
 		} else {
 			parent.fill(50);
