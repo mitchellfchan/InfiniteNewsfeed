@@ -1,5 +1,6 @@
 package theInfinityScore;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,11 +27,13 @@ public class Conductor {
 	
 	int[] majorScale = {0,2,4,5,7,9,11};
 	int[] minorScale = {0,2,3,5,7,8,10};
+	HashMap<Integer, int[]> relatedKeys; 
 	
 	int[] coreMelody = {0,1,2,3,4,5,6,5,4,3,2,1}; 
 	int[] coreBassLine = {0,5,0,3};
 	
-	String bassRootString = "C2";
+	String rootBass = "C2";
+	String rootMelody = "F5";
 	
 	Runnable newLyricsPlease;
 	ExecutorService executor = Executors.newCachedThreadPool();
@@ -42,6 +45,8 @@ public class Conductor {
 		parent = _parent;
 		m = _m;
 		newLyricsPlease = new Lyricist(parent);
+		relatedKeys = new HashMap<Integer, int[]>();
+		makeRelatedHMap();
 		executor.submit(newLyricsPlease);
 		
 		// TODO Auto-generated constructor stub
@@ -100,6 +105,16 @@ public class Conductor {
 			
 			
 		}
+	}
+	
+	public void makeRelatedHMap(){
+		relatedKeys.put(1, minorScale);
+		relatedKeys.put(2, minorScale);
+		relatedKeys.put(3, minorScale);
+		relatedKeys.put(4, majorScale);
+		relatedKeys.put(5, majorScale);
+		relatedKeys.put(6, minorScale);
+		relatedKeys.put(7, minorScale);
 	}
 	
 

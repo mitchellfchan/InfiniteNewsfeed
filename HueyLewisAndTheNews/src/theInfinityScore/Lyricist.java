@@ -60,6 +60,7 @@ public class Lyricist implements Runnable {
 		// println(nytArray);
 
 		int whichHeadline = (int) parent.random(nytArray.size() - 1);
+//		int whichHeadline = 9;
 		entry = nytArray.getJSONObject(whichHeadline);
 		// println(entry);
 
@@ -76,7 +77,10 @@ public class Lyricist implements Runnable {
 					+ list.length);
 		numWords = list.length;
 		for (int i = 0; i < list.length; i++) {
-			wordsNew.add(list[i]);
+			//GET RID OF NON-ASCII CHARACTERS (fuckin' NYT style guide!)
+			String replacementString = list[i].replaceAll("[^\\x00-\\x7F]", "");
+			//
+			wordsNew.add(replacementString);
 		}
 
 	}

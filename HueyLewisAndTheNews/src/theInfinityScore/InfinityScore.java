@@ -50,12 +50,12 @@ public class InfinityScore extends PApplet{
 		conductor = new Conductor(this, metro);
 		
 		cello = new Cello(this);
-		cello.initSamplesScale(conductor.bassRootString, conductor.majorScale);
+		cello.initSamplesScale(conductor.rootBass, conductor.majorScale);
 		cello.setMelody(conductor.coreBassLine);
 		
 		violin = new Violin(this, (sketchPath + "/violin/violin_"), "_025_pianissimo_arco-normal.wav");
 		
-		violin.initSamplesScale("F5", conductor.majorScale);
+		violin.initSamplesScale(conductor.rootMelody, conductor.majorScale);
 		violin.setMelody(conductor.coreMelody);
 		
 		

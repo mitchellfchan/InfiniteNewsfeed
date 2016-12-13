@@ -28,4 +28,9 @@
 <fullyQualifiedTypeName name="ddf.minim.UGen.UGenInput"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ExecutorService"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Executors"/>
+<fullyQualifiedTypeName name="theInfinityScore.InfinityScore"/>
+<fullyQualifiedTypeName name="ddf.minim.ugens.Vocoder"/>
 </qualifiedTypeNameHistroy>

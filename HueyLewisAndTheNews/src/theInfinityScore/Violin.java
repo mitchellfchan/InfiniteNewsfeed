@@ -24,6 +24,7 @@ public class Violin implements Instrument {
 	int hitOn = 2;
 	int octaves = 2;
 	
+	ArrayList<Sampler> bufferedSamples;
 	ArrayList<Sampler> theSamples;
 	ArrayList<Integer> melody;
 	ArrayList<Integer> newMelody;
@@ -39,6 +40,7 @@ public class Violin implements Instrument {
 		
 		parent = _parent;
 		minim = parent.minim;
+		bufferedSamples = new ArrayList<Sampler>();
 		theSamples = new ArrayList<Sampler>();
 		melody = new ArrayList<Integer>();
 		newMelody = new ArrayList<Integer>();
@@ -90,7 +92,16 @@ public class Violin implements Instrument {
 				System.out.println("Made " + notes[root + scaleNotes[i]]);
 			theSamples.add(sam);
 			} catch (Exception e) {
-				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist!");
+				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
+				try{
+					Sampler sam = new Sampler(parent.sketchPath
+				
+						+ "/samples/violin/violin_" + notes[root + scaleNotes[0]]
+								+ "_025_pianissimo_arco-normal.wav", 2, minim);
+				 theSamples.add(sam);
+				} catch (Exception e2) {
+					System.err.println("VIOLIN: OK, something is really fucked here because we can't even make the root note!");
+				}
 			}
 		}
 		
