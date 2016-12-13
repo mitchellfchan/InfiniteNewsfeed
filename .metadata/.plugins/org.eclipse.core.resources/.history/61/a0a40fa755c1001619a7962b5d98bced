@@ -1,0 +1,13 @@
+package theInfinityScore;
+
+import toxi.color.TColor;
+
+public class GUI {
+
+	TColor hilightColor = TColor.newHex("#F56D6D");
+	
+	public GUI() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

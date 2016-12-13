@@ -68,7 +68,7 @@ public class Cello implements Instrument{
 
 				
 		for(int i = 0; i < scaleNotes.length; i++){
-			System.out.println (root + notes[scaleNotes[i]]);
+			if (verbose) System.out.println (root + notes[scaleNotes[i]]);
 			Sampler sam = new Sampler(parent.sketchPath + "/samples/cello_1/cello_" + notes[root + scaleNotes[i]] + "_1_forte_arco-normal.wav", 2, minim);
 			if(verbose) System.out.println ("Made " + notes[root + scaleNotes[i]]);
 			theSamples.add(sam);

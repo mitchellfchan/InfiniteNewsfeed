@@ -32,10 +32,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/user/json/library/json.jar"/>
-	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-builder-5.2-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="lib/user/maryTTS/marytts-lang-en-5.2.jar"/>
 	<classpathentry kind="lib" path="lib/user/maryTTS/voice-cmu-slt-hsmm-5.2.jar"/>
 	<classpathentry kind="lib" path="lib/user/maryTTS/voice-dfki-poppy-hsmm-5.1.jar"/>
 	<classpathentry kind="lib" path="lib/user/maryTTS/voice-dfki-prudence-hsmm-5.1.jar"/>
+	<classpathentry kind="lib" path="lib/user/toxiclibs-complete-0020/toxiclibscore/library/toxiclibscore.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,9 +1,15 @@
 package theInfinityScore;
 
-public class GUI {
+import toxi.geom.*;
+import toxi.color.*;
 
+public class GUI {
+	TColor hilightColor;
+
+ 
+	
 	public GUI() {
-		// TODO Auto-generated constructor stub
+		hilightColor = TColor.newHex("F56D6D");
 	}
 
 }

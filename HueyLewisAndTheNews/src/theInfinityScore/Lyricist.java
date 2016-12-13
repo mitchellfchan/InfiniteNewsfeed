@@ -8,6 +8,8 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public class Lyricist implements Runnable {
+	boolean verbose = false;
+	
 	int counter = 0;
 	private static InfinityScore parent;
 
@@ -22,15 +24,14 @@ public class Lyricist implements Runnable {
 	String headlineNew;
 	int numWords;
 
+	
 	ArrayList<String> words;
-	ArrayList<String> wordsNew;
 	
 	BingSpeech bs;
 
 	public Lyricist(InfinityScore _parent) {
-		parent = _parent;
+		parent = _parent;	
 		words = new ArrayList<String>();
-		wordsNew = new ArrayList<String>();
 		bs = new BingSpeech();
 
 	}
@@ -41,7 +42,7 @@ public class Lyricist implements Runnable {
 		System.out.println(counter + " Times Running This Thread!");
 		getHeadlines();
 		splitHeadlines();
-		recordSoundFiles(wordsNew);
+		recordSoundFiles(words);
 		counter++;
 	}
 
@@ -70,7 +71,7 @@ public class Lyricist implements Runnable {
 	}
 
 	public void splitHeadlines() {
-		wordsNew.clear();
+		words.clear();
 		String[] list = parent.split(headline, " ");
 		if (parent.verbose)
 			System.out.println("   splitHeadlines: # of words in headline: "
@@ -80,7 +81,7 @@ public class Lyricist implements Runnable {
 			//GET RID OF NON-ASCII CHARACTERS (fuckin' NYT style guide!)
 			String replacementString = list[i].replaceAll("[^\\x00-\\x7F]", "");
 			//
-			wordsNew.add(replacementString);
+			words.add(replacementString);
 		}
 
 	}
@@ -99,7 +100,10 @@ public class Lyricist implements Runnable {
 		
 		
 		parent.singer.initSoundFiles(numFiles);
+		parent.singer.knowLyrics(l);
 	}
+	
+
 	
 
 	

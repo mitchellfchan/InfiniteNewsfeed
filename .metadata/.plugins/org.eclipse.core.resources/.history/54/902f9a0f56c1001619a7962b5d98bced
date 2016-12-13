@@ -1,0 +1,14 @@
+package theInfinityScore;
+
+import toxi.color.TColor;
+
+public class GUI {
+	TColor hilightColor;
+
+ 
+	
+	public GUI() {
+		hilightColor = TColor.newRGB(245,109,109);
+	}
+
+}

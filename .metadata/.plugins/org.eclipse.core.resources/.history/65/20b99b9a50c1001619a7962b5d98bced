@@ -1,0 +1,163 @@
+package theInfinityScore;
+
+import java.util.ArrayList;
+
+import ddf.minim.*;
+import ddf.minim.UGen.UGenInput;
+import ddf.minim.ugens.*;
+
+public class Violin implements Instrument {
+	boolean verbose = true;
+	
+	InfinityScore parent;
+	Minim minim;
+	
+	String fileId1;
+	String fileId2;
+	String[] notes = { 
+			"C2", "Cs2", "D2", "Ds2", "E2", "F2", "Fs2", "G2", "Gs2", "A2", "As2", "B2",
+			"C3", "Cs3", "D3", "Ds3", "E3", "F3", "Fs3", "G3", "Gs3", "A3", "As3", "B3", 
+			"C4", "Cs4", "D4", "Ds4", "E4", "F4", "Fs4", "G4", "Gs4", "A4", "As4", "B4", 
+			"C5", "Cs5", "D5", "Ds5", "E5", "F5", "Fs5", "G5", "Gs5", "A5", "As5", "B5", 
+			"C6", "Cs6", "D6", "Ds6", "E6", "F6", "Fs6", "G6", "Gs6", "A6", "As6", "B6",
+			"C7", "Cs7", "D7", "Ds7", "E7", "F7", "Fs7", "G7", "Gs7", "A7", "As7", "B7", };
+
+	int hitOn = 2;
+	int octaves = 2;
+	
+	ArrayList<Sampler> bufferedSamples;
+	ArrayList<Sampler> theSamples;
+	ArrayList<Integer> melody;
+	ArrayList<Integer> newMelody;
+	ArrayList<Sampler> olderNotes;
+	ArrayList<Integer> oldNotes;
+	Sampler activeSample; 
+	int root = 0;
+	int currentNote = 0;
+	int lastNote = -1;
+	boolean doneMelody = false;
+
+	public Violin(InfinityScore _parent, String _fileId1, String _fileId2) {
+		
+		parent = _parent;
+		minim = parent.minim;
+		bufferedSamples = new ArrayList<Sampler>();
+		theSamples = new ArrayList<Sampler>();
+		melody = new ArrayList<Integer>();
+		newMelody = new ArrayList<Integer>();
+		fileId1 = _fileId1;
+		fileId2 = _fileId2;
+
+	}
+
+	public void setRoot(int val) {
+		root = val;
+	}
+
+	public void setMelody(int[] newMelodyArray) {
+		newMelody.clear();
+		for (int i = 0; i < newMelodyArray.length; i++) {
+			newMelody.add(newMelodyArray[i]);
+		}
+		melody = new ArrayList(newMelody);
+		currentNote = 0;
+		if (verbose)
+			System.out.println("VIOLIN // setMelody : Created a " + melody.size() + " note Melody");
+	}
+
+	public void initSamplesScale(String newRoot, int[] scaleNotes) {
+		
+		for (int i = 0; i < notes.length; i++) {
+			if (newRoot == notes[i]) {
+				root = i;
+				if(verbose) System.out.println("VIOLIN // initSamplesScale : root is " + root);
+			}
+		}
+		
+		
+		bufferedSamples.clear();
+		if (verbose) {
+			System.out.println("VIOLIN // initSamplesScale :cleared bufferedSamples.");
+		}
+
+		for (int i = 0; i < scaleNotes.length; i++) {
+			if(verbose) System.out.print("VIOLIN // initSamplesScale : attempting to make " + notes[root + scaleNotes[i]]);
+			try{
+			Sampler sam = new Sampler(parent.sketchPath
+					+ "/samples/violin/violin_" + notes[root + scaleNotes[i]]
+					+ "_025_pianissimo_arco-normal.wav", 2, minim);
+			if (verbose)
+				System.out.println(" -- Successfully made " + notes[root + scaleNotes[i]]);
+			bufferedSamples.add(sam);
+			} catch (Exception e) {
+				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
+				try{
+					Sampler sam = new Sampler(fileId1 + notes[root + scaleNotes[0]]	+ fileId2, 2, minim);
+				 bufferedSamples.add(sam);
+				} catch (Exception e2) {
+					System.err.println("VIOLIN: OK, something is really fucked here because we can't even make the root note!");
+				}
+			}
+		}
+		
+		for(Sampler s : theSamples){
+			s.unpatch(parent.out);
+		}
+		theSamples.clear();
+		theSamples = new ArrayList(bufferedSamples);
+		
+		for(Sampler s : theSamples){
+			s.patch(parent.out);
+		}
+
+	}
+	
+	public String getCurrentNoteString(){
+		try{
+		int indexInScale =  melody.get(currentNote);
+		int stepsInChromatic = parent.conductor.majorScale[indexInScale];
+		String theNote = notes[root + stepsInChromatic];
+		return(theNote);
+		} catch (Exception e){
+			System.out.println("Well This Fucked Up");
+			return("C2");
+		}
+		
+	
+		
+	}
+
+	public void resetNext() {
+		
+		doneMelody = true;
+		
+		int[] newMelodyArray = {(int)parent.random(6), (int)parent.random(6), (int)parent.random(6)};
+		setMelody(newMelodyArray);
+		
+	}
+
+	public void noteOn(float dur) {
+
+		theSamples.get(melody.get(currentNote)).trigger();
+		if (verbose) {
+			System.out
+					.println("Playing Violin Note " + melody.get(currentNote));
+		}
+	
+		currentNote++;
+		if (currentNote >= melody.size()) {
+			resetNext();
+		}
+
+	}
+
+	public void setNote(int note) {
+		currentNote = note;
+
+	}
+
+	public void noteOff() {
+
+	
+	}
+}

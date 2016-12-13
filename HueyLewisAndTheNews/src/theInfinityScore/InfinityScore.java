@@ -19,7 +19,7 @@ public class InfinityScore extends PApplet{
  //static final long serialVersionUID = -688316076483333806L;
 	// Import Libraries
 	
-
+	GUI gui;
  	Minim minim;
  	AudioOutput out;
 	
@@ -42,8 +42,9 @@ public class InfinityScore extends PApplet{
 
 
 	public void setup() {
-		//TextToSpeech theTTS = new TextToSpeech();
-		  minim = new Minim(this);
+	
+		gui = new GUI(); 
+		minim = new Minim(this);
 		  out = minim.getLineOut(Minim.MONO, 4096);
 		
 		metro = new Metronome(this);
@@ -55,7 +56,7 @@ public class InfinityScore extends PApplet{
 		
 		violin = new Violin(this, (sketchPath + "/violin/violin_"), "_025_pianissimo_arco-normal.wav");
 		
-		violin.initSamplesScale(conductor.rootMelody, conductor.majorScale);
+		violin.initSamplesScale(conductor.rootMelody, conductor.relatedKeys.get(conductor.melodyHarmony));
 		violin.setMelody(conductor.coreMelody);
 		
 		
@@ -90,6 +91,7 @@ public class InfinityScore extends PApplet{
 	  translate(100,300);
 	  metro.display();
 	  popMatrix();
+	  singer.display();
 	 
 	}
 

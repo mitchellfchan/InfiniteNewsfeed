@@ -7,7 +7,8 @@ import ddf.minim.UGen.UGenInput;
 import ddf.minim.ugens.*;
 
 public class Violin implements Instrument {
-	boolean verbose = false;
+	boolean verbose = true;
+	
 	InfinityScore parent;
 	Minim minim;
 	
@@ -61,7 +62,7 @@ public class Violin implements Instrument {
 		melody = new ArrayList(newMelody);
 		currentNote = 0;
 		if (verbose)
-			System.out.println("Created a " + melody.size() + " note Melody");
+			System.out.println("VIOLIN // setMelody : Created a " + melody.size() + " note Melody");
 	}
 
 	public void initSamplesScale(String newRoot, int[] scaleNotes) {
@@ -69,7 +70,7 @@ public class Violin implements Instrument {
 		for (int i = 0; i < notes.length; i++) {
 			if (newRoot == notes[i]) {
 				root = i;
-				if(verbose) System.out.println("VIOLIN // initSamplesScale : root is " + root);
+				if(verbose) System.out.println("VIOLIN // initSamplesScale : root is " + notes[root]);
 			}
 		}
 		
@@ -80,21 +81,24 @@ public class Violin implements Instrument {
 		}
 
 		for (int i = 0; i < scaleNotes.length; i++) {
-			System.out.println(root + notes[scaleNotes[i]]);
+			if(verbose) System.out.print("VIOLIN // initSamplesScale : attempting to make " + notes[root + scaleNotes[i]]);
 			try{
 			Sampler sam = new Sampler(parent.sketchPath
 					+ "/samples/violin/violin_" + notes[root + scaleNotes[i]]
 					+ "_025_pianissimo_arco-normal.wav", 2, minim);
 			if (verbose)
-				System.out.println("Made " + notes[root + scaleNotes[i]]);
+				System.out.println(" -- Successfully made " + notes[root + scaleNotes[i]]);
 			bufferedSamples.add(sam);
 			} catch (Exception e) {
-				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
+				//TODO: SHOULD ACTUALLY JUST TRY SWITCHING OCTAVES HERE
+				System.err.println(" VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
 				try{
 					Sampler sam = new Sampler(fileId1 + notes[root + scaleNotes[0]]	+ fileId2, 2, minim);
 				 bufferedSamples.add(sam);
+				 System.err.println(" VIOLIN: successfully made copy of the root instead, " + notes[root+scaleNotes[0]]);
 				} catch (Exception e2) {
-					System.err.println("VIOLIN: OK, something is really fucked here because we can't even make the root note!");
+					System.err.println(" VIOLIN: OK, something is really fucked here because we can't even make the root note!");
+					
 				}
 			}
 		}

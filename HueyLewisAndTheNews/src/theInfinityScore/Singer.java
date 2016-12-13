@@ -10,7 +10,7 @@ import processing.sound.SoundFile;
 public class Singer {
 
 //---------------------CHANGE FOR FUN TIMES-----------------
-	boolean verbose = true;
+	boolean verbose = false;
 	int repeatCount = 0;
 	int tolerableRepetition = 10;
 	int hitOn = 4;
@@ -22,6 +22,7 @@ public class Singer {
 
 	BingSpeech bs;
 	boolean tPainMode = false;
+	ArrayList<String> lyrics;
 	ArrayList<Sampler> samples;
 	ArrayList<Sampler> samplesTPain;
 	ArrayList<Vocoder> vocoders;
@@ -34,7 +35,7 @@ public class Singer {
 	public Singer(InfinityScore _parent) {
 		parent = _parent;
 		minim = parent.minim;
-
+		lyrics = new ArrayList<String>();
 		noteFreqs = new HashMap<String, Float>();
 		initNoteHashMap();
 		samples = new ArrayList<Sampler>();
@@ -166,6 +167,22 @@ public class Singer {
 
 public void resetRepeatCount(){
 	repeatCount = 0;
+}
+
+public void display(){
+	for(int i = 0; i < lyrics.size(); i++){
+		if(i == currentPlace){
+			parent.fill(parent.gui.hilightColor.toARGB());
+		} else {
+			parent.fill(50);
+		}
+		parent.text(lyrics.get(i), 0, i*20);
+	}
+}
+
+public void knowLyrics(ArrayList<String> l){
+	lyrics.clear();
+	lyrics = new ArrayList<String>(l);
 }
 
 	public void initNoteHashMap() {
