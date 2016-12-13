@@ -73,8 +73,12 @@ public class Conductor {
 			
 			if(m.beatCount%parent.singer.hitOn == 0){
 				parent.singer.singNext();
-			}		
+			}
+			
+
 		}
+		
+	
 	}
 	
 	public void refreshLyrics(){
@@ -105,8 +109,6 @@ public class Conductor {
 			
 		}
 	}
-	
-	
 	
 	public void makeRelatedHMap(){
 		relatedKeys.put(1, minorScale);

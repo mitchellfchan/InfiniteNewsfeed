@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 public class Conductor {
 	boolean verbose = false;
-
 	String[] notes = { 
 			"C2", "Cs2", "D2", "Ds2", "E2", "F2", "Fs2", "G2", "Gs2", "A2", "As2", "B2",
 			"C3", "Cs3", "D3", "Ds3", "E3", "F3", "Fs3", "G3", "Gs3", "A3", "As3", "B3", 
@@ -32,11 +31,8 @@ public class Conductor {
 	int[] coreMelody = {0,1,2,3,4,5,6,5,4,3,2,1}; 
 	int[] coreBassLine = {0,5,0,3};
 	
-	int key = 0;
-	int rootBassInt = key;
-	int rootMelodyInt = rootBassInt + 12*2 + 5;
-	String rootBass = notes[rootBassInt];
-	String rootMelody = notes[rootMelodyInt];
+	String rootBass = "C2";
+	String rootMelody = "F5";
 	
 	Runnable newLyricsPlease;
 	ExecutorService executor = Executors.newCachedThreadPool();
@@ -73,8 +69,12 @@ public class Conductor {
 			
 			if(m.beatCount%parent.singer.hitOn == 0){
 				parent.singer.singNext();
-			}		
+			}
+			
+
 		}
+		
+	
 	}
 	
 	public void refreshLyrics(){
@@ -105,8 +105,6 @@ public class Conductor {
 			
 		}
 	}
-	
-	
 	
 	public void makeRelatedHMap(){
 		relatedKeys.put(1, minorScale);

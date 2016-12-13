@@ -36,7 +36,7 @@ public class Conductor {
 	int rootBassInt = key;
 	int rootMelodyInt = rootBassInt + 12*2 + 5;
 	String rootBass = notes[rootBassInt];
-	String rootMelody = notes[rootMelodyInt];
+	String rootMelody = notes[0 + 12*2  + 5];
 	
 	Runnable newLyricsPlease;
 	ExecutorService executor = Executors.newCachedThreadPool();
@@ -73,8 +73,12 @@ public class Conductor {
 			
 			if(m.beatCount%parent.singer.hitOn == 0){
 				parent.singer.singNext();
-			}		
+			}
+			
+
 		}
+		
+	
 	}
 	
 	public void refreshLyrics(){
@@ -105,8 +109,6 @@ public class Conductor {
 			
 		}
 	}
-	
-	
 	
 	public void makeRelatedHMap(){
 		relatedKeys.put(1, minorScale);

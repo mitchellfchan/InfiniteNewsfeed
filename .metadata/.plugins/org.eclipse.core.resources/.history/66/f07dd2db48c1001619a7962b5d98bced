@@ -91,7 +91,10 @@ public class Violin implements Instrument {
 			} catch (Exception e) {
 				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
 				try{
-					Sampler sam = new Sampler(fileId1 + notes[root + scaleNotes[0]]	+ fileId2, 2, minim);
+					Sampler sam = new Sampler(parent.sketchPath
+				
+						+ "/samples/violin/violin_" + notes[root + scaleNotes[0]]
+								+ "_025_pianissimo_arco-normal.wav", 2, minim);
 				 bufferedSamples.add(sam);
 				} catch (Exception e2) {
 					System.err.println("VIOLIN: OK, something is really fucked here because we can't even make the root note!");

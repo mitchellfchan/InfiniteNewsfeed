@@ -69,14 +69,17 @@ public class Violin implements Instrument {
 		for (int i = 0; i < notes.length; i++) {
 			if (newRoot == notes[i]) {
 				root = i;
-				if(verbose) System.out.println("VIOLIN // initSamplesScale : root is " + root);
 			}
 		}
 		
-		
-		bufferedSamples.clear();
+		for(Sampler s : theSamples){
+			s.unpatch(parent.out);
+		}
+
+		theSamples.clear();
 		if (verbose) {
-			System.out.println("VIOLIN // initSamplesScale :cleared bufferedSamples.");
+			System.out.println("cleared theSamples. Array List contains: "
+					+ theSamples.size() + " entries");
 		}
 
 		for (int i = 0; i < scaleNotes.length; i++) {
@@ -87,23 +90,20 @@ public class Violin implements Instrument {
 					+ "_025_pianissimo_arco-normal.wav", 2, minim);
 			if (verbose)
 				System.out.println("Made " + notes[root + scaleNotes[i]]);
-			bufferedSamples.add(sam);
+			theSamples.add(sam);
 			} catch (Exception e) {
 				System.err.println("VIOLIN: ERROR in InitSamplesScale: file doesn't exist! Gonna try to just make a copy of the root");
 				try{
-					Sampler sam = new Sampler(fileId1 + notes[root + scaleNotes[0]]	+ fileId2, 2, minim);
-				 bufferedSamples.add(sam);
+					Sampler sam = new Sampler(parent.sketchPath
+				
+						+ "/samples/violin/violin_" + notes[root + scaleNotes[0]]
+								+ "_025_pianissimo_arco-normal.wav", 2, minim);
+				 theSamples.add(sam);
 				} catch (Exception e2) {
 					System.err.println("VIOLIN: OK, something is really fucked here because we can't even make the root note!");
 				}
 			}
 		}
-		
-		for(Sampler s : theSamples){
-			s.unpatch(parent.out);
-		}
-		theSamples.clear();
-		theSamples = new ArrayList(bufferedSamples);
 		
 		for(Sampler s : theSamples){
 			s.patch(parent.out);
